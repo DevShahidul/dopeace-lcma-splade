@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateEmployeeRequest;
 use App\Models\City;
-use App\Models\Department;
+use App\Models\Designation;
 use App\Models\Employee;
 use App\Tables\Employees;
 use Illuminate\Http\Request;
@@ -45,9 +45,9 @@ class EmployeeController extends Controller
                     'Middle name'
                 ),
                 Input::make('zip_code')->label('Zip Code'),
-                Select::make('department_id')
-                    ->label('Choose a Department')
-                    ->options(Department::pluck('name', 'id')->toArray()),
+                Select::make('designation_id')
+                    ->label('Choose a Designation')
+                    ->options(Designation::pluck('name', 'id')->toArray()),
                 Select::make('city_id')
                     ->label('Choose a City')
                     ->options(City::pluck('name', 'id')->toArray()),
@@ -96,9 +96,9 @@ class EmployeeController extends Controller
                     'Middle name'
                 ),
                 Input::make('zip_code')->label('Zip Code'),
-                Select::make('department_id')
-                    ->label('Choose a Department')
-                    ->options(Department::pluck('name', 'id')->toArray()),
+                Select::make('designation_id')
+                    ->label('Choose a Designation')
+                    ->options(Designation::pluck('name', 'id')->toArray()),
                 Select::make('city_id')
                     ->label('Choose a City')
                     ->options(City::pluck('name', 'id')->toArray()),

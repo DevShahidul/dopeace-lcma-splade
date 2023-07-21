@@ -2,24 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateDepartmentRequest;
-use App\Models\Department;
-use App\Tables\Departments;
-use Illuminate\Http\Request;
+use App\Http\Requests\CreateDesignationRequest;
+use App\Models\Designation;
+use App\Tables\Designations;
 use ProtoneMedia\Splade\Facades\Splade;
 use ProtoneMedia\Splade\FormBuilder\Input;
 use ProtoneMedia\Splade\FormBuilder\Submit;
 use ProtoneMedia\Splade\SpladeForm;
 
-class DepartmentController extends Controller
+class DesignationController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('admin.departments.index', [
-            'departments' => Departments::class
+        return view('admin.designations.index', [
+            'designations' => Designations::class
         ]);
     }
 
@@ -29,13 +28,13 @@ class DepartmentController extends Controller
     public function create()
     {
         $form = SpladeForm::make()
-            ->action(route('admin.departments.store'))
+            ->action(route('admin.designations.store'))
             ->fields([
                 Input::make('name')->label('Name'),
                 Submit::make()->label('Save')
             ])->class('space-y-4 bg-white rounded p-4');
 
-        return view('admin.departments.create', [
+        return view('admin.designations.create', [
             'form' => $form
         ]);
     }
@@ -43,32 +42,32 @@ class DepartmentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateDepartmentRequest $request)
+    public function store(CreateDesignationRequest $request)
     {
-        Department::create($request->validated());
+        Designation::create($request->validated());
 
-        Splade::toast('Department created')->autoDismiss(3);
+        Splade::toast('designation created')->autoDismiss(3);
 
-        return to_route('admin.departments.index');
+        return to_route('admin.designations.index');
     }
 
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Department $department)
+    public function edit(Designation $designation)
     {
         $form = SpladeForm::make()
-            ->action(route('admin.departments.update', $department))
+            ->action(route('admin.designations.update', $designation))
             ->method('PUT')
             ->fields([
                 Input::make('name')->label('Name'),
                 Submit::make()->label('Save')
             ])
-            ->fill($department)
+            ->fill($designation)
             ->class('space-y-4 bg-white rounded p-4');
 
-        return view('admin.departments.edit', [
+        return view('admin.designations.edit', [
             'form' => $form
         ]);
     }
@@ -76,22 +75,22 @@ class DepartmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CreateDepartmentRequest $request, Department $department)
+    public function update(CreateDesignationRequest $request, Designation $designation)
     {
-        $department->update($request->validated());
+        $designation->update($request->validated());
 
-        Splade::toast('Department updated')->autoDismiss(3);
+        Splade::toast('designation updated')->autoDismiss(3);
 
-        return to_route('admin.departments.index');
+        return to_route('admin.designations.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Department $department)
+    public function destroy(Designation $designation)
     {
-        $department->delete();
-        Splade::toast('Department deleted')->autoDismiss(3);
+        $designation->delete();
+        Splade::toast('designation deleted')->autoDismiss(3);
 
         return back();
     }

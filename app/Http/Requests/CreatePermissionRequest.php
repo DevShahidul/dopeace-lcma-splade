@@ -23,6 +23,7 @@ class CreatePermissionRequest extends FormRequest
     {
         return [
             'name' => ['required', 'unique:permissions,name'],
+            'group_name' => ['required'],
             'roles' => ['nullable']
         ];
     }

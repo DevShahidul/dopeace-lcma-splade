@@ -26,7 +26,7 @@ class CreateEmployeeRequest extends FormRequest
             'last_name' => ['required', 'min:3', 'max:100'],
             'middle_name' => ['required', 'min:3', 'max:100'],
             'zip_code' => ['required', 'min:5', 'max:10'],
-            'department_id' => ['required', 'exists:departments,id'],
+            'designation_id' => ['required', 'exists:Designations,id'],
             'city_id' => ['required', 'exists:cities,id'],
             'birth_date' => ['required', 'date'],
             'date_hired' => ['required', 'date'],

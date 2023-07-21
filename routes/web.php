@@ -3,7 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\CountryController;
-use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
@@ -57,7 +57,7 @@ Route::middleware('splade')->group(function () {
         Route::resource('/countries', CountryController::class);
         Route::resource('/states', StateController::class);
         Route::resource('/cities', CityController::class);
-        Route::resource('/departments', DepartmentController::class);
+        Route::resource('/designations', DesignationController::class);
         Route::resource('/roles', RoleController::class);
         Route::resource('/permissions', PermissionController::class);
     });

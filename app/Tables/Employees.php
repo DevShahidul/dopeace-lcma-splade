@@ -4,7 +4,7 @@ namespace App\Tables;
 
 use App\Models\City;
 use App\Models\Country;
-use App\Models\Department;
+use App\Models\Designation;
 use App\Models\Employee;
 use App\Models\State;
 use Illuminate\Http\Request;
@@ -55,7 +55,7 @@ class Employees extends AbstractTable
         return QueryBuilder::for(Employee::class)
             ->defaultSort('id')
             ->allowedSorts(['id', 'first_name', 'last_name'])
-            ->allowedFilters(['id', 'first_name', 'first_name', 'country_id', 'department_id', 'state_id', 'city_id', $globalSearch]);
+            ->allowedFilters(['id', 'first_name', 'first_name', 'country_id', 'designation_id', 'state_id', 'city_id', $globalSearch]);
     }
 
     /**
@@ -72,7 +72,7 @@ class Employees extends AbstractTable
             ->column('first_name', sortable: true)
             ->column('last_name', sortable: true)
             ->column(key: 'city.name', label: 'City')
-            ->column(key: 'department.name', label: 'Departrment')
+            ->column(key: 'designation.name', label: 'Departrment')
             ->column('action')
             ->selectFilter(
                 key: 'country_id',
@@ -90,9 +90,9 @@ class Employees extends AbstractTable
                 label: 'City'
             )
             ->selectFilter(
-                key: 'department_id',
-                options: Department::pluck('name', 'id')->toArray(),
-                label: 'Department'
+                key: 'designation_id',
+                options: Designation::pluck('name', 'id')->toArray(),
+                label: 'designation'
             )
             ->paginate(15);
     }

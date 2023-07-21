@@ -13,14 +13,17 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('middle_name')->nullable();
-            $table->foreignId('department_id')->constrained();
+            $table->string('phone');
+            $table->foreignId('designation_id')->constrained();
             $table->foreignId('country_id')->constrained();
             $table->foreignId('state_id')->constrained();
             $table->foreignId('city_id')->constrained();
             $table->char('zip_code', 10);
+            $table->string('address');
+            $table->string('facebook_url')->nullable();
+            $table->string('whatsapp_number')->nullable();
+            $table->foreignId('ngo_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->date('birth_date')->nullable();
             $table->date('date_hired')->nullable();
             $table->timestamps();

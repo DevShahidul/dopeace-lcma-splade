@@ -6,7 +6,6 @@ use App\Http\Requests\StoreCountryRequest;
 use App\Http\Requests\UpdateCountryRequest;
 use App\Models\Country;
 use App\Tables\Countries;
-use Illuminate\Http\Request;
 use ProtoneMedia\Splade\Facades\Splade;
 use ProtoneMedia\Splade\FormBuilder\Input;
 use ProtoneMedia\Splade\FormBuilder\Submit;
@@ -52,7 +51,8 @@ class CountryController extends Controller
             ->action(route('admin.countries.update', $country))
             ->fields([
                 Input::make('country_code')->label('Country Code'),
-                Input::make('name')->label('User Name'),
+                Input::make('name')->label('Name'),
+                Input::make('phonecode')->label('Phone Code'),
                 Submit::make()->label('Update'),
             ])
             ->fill($country)

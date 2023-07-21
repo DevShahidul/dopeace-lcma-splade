@@ -67,6 +67,7 @@ class Countries extends AbstractTable
             ->column('id', sortable: true)
             ->column('name', sortable: true)
             ->column('country_code', sortable: true)
+            ->column('phonecode', sortable: false)
             ->column('action')
             ->paginate(15);
     }

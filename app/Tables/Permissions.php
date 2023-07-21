@@ -66,6 +66,7 @@ class Permissions extends AbstractTable
             ->withGlobalSearch(columns: ['name'])
             ->column('id', sortable: true)
             ->column('name', sortable: true)
+            ->column('group_name', sortable: false)
             ->column('action')
             ->paginate(15);
     }

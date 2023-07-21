@@ -2,7 +2,7 @@
 
 namespace App\Tables;
 
-use App\Models\Department;
+use App\Models\Designation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use ProtoneMedia\Splade\AbstractTable;
@@ -10,7 +10,7 @@ use ProtoneMedia\Splade\SpladeTable;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
-class Departments extends AbstractTable
+class Designations extends AbstractTable
 {
     /**
      * Create a new instance.
@@ -47,7 +47,7 @@ class Departments extends AbstractTable
                 });
             });
         });
-        return QueryBuilder::for(Department::class)
+        return QueryBuilder::for(Designation::class)
             ->defaultSort('id')
             ->allowedSorts(['id', 'name'])
             ->allowedFilters(['id', 'name', $globalSearch]);

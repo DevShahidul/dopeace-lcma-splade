@@ -1,6 +1,6 @@
 <x-admin-layout>
     <div class="flex justify-between">
-        <h1 class="text-2xl font-semibold p-4">Employees Index</h1>
+        <h1 class="text-2xl font-semibold p-4">Employees List</h1>
         <div class="p-4">
             <Link href="{{ route('admin.employees.create') }}"
                 class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded text-white">New Employee</Link>

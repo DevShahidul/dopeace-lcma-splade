@@ -14,6 +14,8 @@ class Employee extends Model
     protected $casts = [
         'birth_date' => 'date',
         'date_hired' => 'date',
+        'facebook_url' => 'string',
+        'whatsapp_number' => 'string',
     ];
 
     public function country()
@@ -28,8 +30,8 @@ class Employee extends Model
     {
         return $this->belongsTo(City::class);
     }
-    public function department()
+    public function designation()
     {
-        return $this->belongsTo(Department::class);
+        return $this->belongsTo(Designation::class);
     }
 }
