@@ -8,22 +8,20 @@ use App\Models\Country;
 use App\Models\LearningCenter;
 use App\Models\Ngo;
 use App\Models\State;
-use Illuminate\Http\Request;
+use App\Tables\LearningCenters;
 use Illuminate\View\View;
+use ProtoneMedia\Splade\Facades\Splade;
 
 class LearningCenterController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request): View
+    public function index(): View
     {
-        $learningCenters = LearningCenter::all();
-        if($request->has('search')){
-            $learningCenters = LearningCenter::where('name', 'like', "%{$request->search}%")->orWhere('ngo_id', 'like', "%{$request->search}%")->get();
-        }
-
-        return view('pages.learning-center.index', compact('learningCenters'));
+        return view('admin.learning-centers.index', [
+            'learningCenters' => LearningCenters::class
+        ]);
     }
 
     /**
@@ -36,7 +34,7 @@ class LearningCenterController extends Controller
         $states = State::all();
         $cities = City::all();
         $ngos = Ngo::all();
-        return view('pages.learning-center.create', compact(['countries', 'states', 'cities', 'ngos']));
+        return view('admin.learning-centers.create', compact(['countries', 'states', 'cities', 'ngos']));
     }
 
     /**
@@ -45,8 +43,8 @@ class LearningCenterController extends Controller
     public function store(StoreLearningCenterRequest $request)
     {
         LearningCenter::create($request->validated());
-
-        return redirect()->route('learning-centers.index')->with('message', 'Learning Center Created Successfully!');
+        Splade::toast('Learning Center Created successfully!')->autoDismiss(3);
+        return to_route('admin.learning-centers.index');
     }
 
     /**
@@ -66,7 +64,7 @@ class LearningCenterController extends Controller
         $states = State::all();
         $cities = City::all();
         $ngos = Ngo::all();
-        return view('pages.learning-center.edit', compact('learningCenter', 'ngos', 'countries', 'states', 'cities'));
+        return view('admin.learning-centers.edit', compact('learningCenter', 'ngos', 'countries', 'states', 'cities'));
     }
 
     /**
@@ -75,16 +73,17 @@ class LearningCenterController extends Controller
     public function update(StoreLearningCenterRequest $request, LearningCenter $learningCenter)
     {
         $learningCenter->update($request->validated());
-        return redirect()->route('learning-centers.index')->with('message', 'Learning Center Updated Successfully!');
+        Splade::toast('Learning Center Updated successfully!')->autoDismiss(3);
+        return to_route('admin.learning-centers.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(LearningCenter $learningCenter)
     {
-        $learningCenter = LearningCenter::findOrFail($id);
         $learningCenter->delete();
-        return redirect()->route('learning-centers.index')->with('message', 'Learning Center Deleted Successfully');
+        Splade::toast('Learning Center Deleted successfully!')->autoDismiss(3);
+        return to_route('admin.learning-centers.index');
     }
 }

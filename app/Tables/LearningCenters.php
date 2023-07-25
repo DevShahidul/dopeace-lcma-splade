@@ -2,17 +2,14 @@
 
 namespace App\Tables;
 
-use App\Models\Country;
+use App\Models\LearningCenter;
 use App\Models\Ngo;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 use ProtoneMedia\Splade\AbstractTable;
 use ProtoneMedia\Splade\Facades\Toast;
 use ProtoneMedia\Splade\SpladeTable;
-use Spatie\QueryBuilder\AllowedFilter;
-use Spatie\QueryBuilder\QueryBuilder;
 
-class Ngos extends AbstractTable
+class LearningCenters extends AbstractTable
 {
     /**
      * Create a new instance.
@@ -41,18 +38,7 @@ class Ngos extends AbstractTable
      */
     public function for()
     {
-        $globalSearch = AllowedFilter::callback('global', function ($query, $value) {
-            $query->where(function ($query) use ($value) {
-                Collection::wrap($value)->each(function ($value) use ($query) {
-                    $query
-                        ->orWhere('name', 'LIKE', "%{$value}%");
-                });
-            });
-        });
-        return QueryBuilder::for(Ngo::class)
-            ->defaultSort('id')
-            ->allowedSorts(['id', 'name'])
-            ->allowedFilters(['id', 'name', 'country_id', $globalSearch]);
+        return LearningCenter::query();
     }
 
     /**
@@ -64,30 +50,30 @@ class Ngos extends AbstractTable
     public function configure(SpladeTable $table)
     {
         $table
-            ->withGlobalSearch(columns: ['name', 'country_id', 'state_id', 'city_id'])
+            ->withGlobalSearch(columns: ['id', 'name', 'country_id', 'state_id', 'city_id', 'ngo_id'])
             ->column('id', sortable: true)
-            ->column('name', sortable: true)
+            ->column('name')
+            ->column(key: 'ngo.name', label: "Ngo")
             ->column(key: 'country.name', label: 'Country', sortable: true)
             ->column(key: 'state.name', label: 'State', sortable: true)
             ->column(key: 'city.name', label: 'City', sortable: true)
             ->column('action')
             ->selectFilter(
-                key: 'country_id',
-                options: Country::all()->pluck('name', 'id')->toArray(),
-                label: 'Filter By Country',
+                key: 'ngo_id',
+                options: Ngo::all()->pluck('name', 'id')->toArray(),
+                label: 'Filter By Ngo',
                 noFilterOption: true,
-                noFilterOptionLabel: 'All Country'
+                noFilterOptionLabel: 'All Ngo'
             )
             ->bulkAction(
-                label: 'Delete Selected Ngos',
-                each: fn (Ngo $ngo) => $ngo->delete(),
-                confirm: 'Are you sure you want to delete the selected ngos?',
+                label: 'Delete Selected Learning Centers',
+                each: fn (LearningCenter $learningCenter) => $learningCenter->delete(),
+                confirm: 'Are you sure you want to delete the selected Learning Centers?',
                 confirmButton: 'Delete',
                 cancelButton: 'Cancel',
-                after: fn () => Toast::info('Ngos deleted successfully!'),
+                after: fn () => Toast::info('Learning Centers deleted successfully!'),
             )
-            ->paginate(15);
-
+            ->paginate(10);
             // ->searchInput()
             // ->selectFilter()
             // ->withGlobalSearch()

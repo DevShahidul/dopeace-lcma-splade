@@ -28,8 +28,7 @@ class StoreLearningCenterRequest extends FormRequest
             'state_id' => ['required'],
             'city_id' => ['required'],
             'zip_code' => ['required', 'max:255'],
-            'address' => ['required', 'string', 'max:255'],
-            'type' => ['required']
+            'address' => ['required', 'string', 'max:255']
         ];
     }
 }
