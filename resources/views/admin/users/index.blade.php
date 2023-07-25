@@ -1,7 +1,7 @@
 <x-admin-layout>
     <div class="flex justify-between">
-        <h1 class="text-2xl font-semibold p-4">Users List</h1>
-        <div class="p-4">
+        <h1 class="text-2xl font-semibold pl-0 p-4">Users List</h1>
+        <div class="p-4 pr-0">
             <Link slideover href="{{ route('admin.users.create') }}"
                 class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded text-white">New User</Link>
         </div>

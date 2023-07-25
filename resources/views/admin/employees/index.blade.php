@@ -1,9 +1,8 @@
 <x-admin-layout>
     <div class="flex justify-between">
-        <h1 class="text-2xl font-semibold p-4">Employees List</h1>
-        <div class="p-4">
-            <Link href="{{ route('admin.employees.create') }}"
-                class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded text-white">New Employee</Link>
+        <h1 class="text-2xl font-semibold pl-0 p-4">Employees List</h1>
+        <div class="p-4 pr-0">
+            <Link href="{{ route('admin.employees.create') }}" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded text-white">New Employee</Link>
         </div>
     </div>
     <x-splade-table :for="$employees">

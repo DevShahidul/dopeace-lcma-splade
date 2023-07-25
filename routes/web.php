@@ -5,6 +5,8 @@ use App\Http\Controllers\CityController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\LearningCenterController;
+use App\Http\Controllers\NgoController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
@@ -60,6 +62,8 @@ Route::middleware('splade')->group(function () {
         Route::resource('/designations', DesignationController::class);
         Route::resource('/roles', RoleController::class);
         Route::resource('/permissions', PermissionController::class);
+        Route::resource('/ngos', NgoController::class);
+        Route::resource('/learning-centers', LearningCenterController::class);
     });
 
     require __DIR__ . '/auth.php';

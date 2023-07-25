@@ -43,7 +43,7 @@ return new class extends Migration
             $table->string('institute_type');
             $table->string('address_of_institute');
             $table->string('grade_of_students');
-            $table->string('designation');
+            $table->string('department');
             $table->timestamps();
         });
     }

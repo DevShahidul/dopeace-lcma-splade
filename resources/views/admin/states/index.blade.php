@@ -1,15 +1,15 @@
 <x-admin-layout>
     <div class="flex justify-between">
-        <h1 class="text-2xl font-semibold p-4">States List</h1>
-        <div class="p-4">
-            <Link href="{{ route('admin.states.create') }}"
+        <h1 class="text-2xl font-semibold pl-0 p-4">States List</h1>
+        <div class="p-4 pr-0">
+            <Link slideover href="{{ route('admin.states.create') }}"
                 class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded text-white">New State</Link>
         </div>
     </div>
     <x-splade-table :for="$states">
         @cell('action', $state)
             <div class="space-x-2">
-                <Link href="{{ route('admin.states.edit', $state) }}"
+                <Link slideover href="{{ route('admin.states.edit', $state) }}"
                     class="text-green-400 hover:text-green-700 font-semibold">
                 Edit
                 </Link>
