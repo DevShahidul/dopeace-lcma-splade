@@ -7,7 +7,6 @@ use App\Models\City;
 use App\Models\Designation;
 use App\Models\Employee;
 use App\Tables\Employees;
-use Illuminate\Http\Request;
 use ProtoneMedia\Splade\Facades\Splade;
 use ProtoneMedia\Splade\FormBuilder\Date;
 use ProtoneMedia\Splade\FormBuilder\Input;
@@ -60,7 +59,7 @@ class EmployeeController extends Controller
             'form' => $form
         ]);
     }
-
+    
     /**
      * Store a newly created resource in storage.
      */
