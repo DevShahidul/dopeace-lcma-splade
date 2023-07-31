@@ -57,7 +57,7 @@ class LearningCenters extends AbstractTable
             ->column(key: 'country.name', label: 'Country', sortable: true)
             ->column(key: 'state.name', label: 'State', sortable: true)
             ->column(key: 'city.name', label: 'City', sortable: true)
-            ->column('action')
+            ->column('action', exportAs: false)
             ->selectFilter(
                 key: 'ngo_id',
                 options: Ngo::all()->pluck('name', 'id')->toArray(),
@@ -73,6 +73,7 @@ class LearningCenters extends AbstractTable
                 cancelButton: 'Cancel',
                 after: fn () => Toast::info('Learning Centers deleted successfully!'),
             )
+            ->export()
             ->paginate(10);
             // ->searchInput()
             // ->selectFilter()

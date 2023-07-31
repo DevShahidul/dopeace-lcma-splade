@@ -9,7 +9,7 @@
     <x-splade-table :for="$users">
         @cell('action', $user)
             <div class="space-x-2">
-                <Link href="{{ route('admin.users.edit', $user) }}" class="text-green-400 hover:text-green-700 font-semibold">Edit</Link>
+                <Link slideover href="{{ route('admin.users.edit', $user) }}" class="text-green-400 hover:text-green-700 font-semibold">Edit</Link>
                 <Link href="{{ route('admin.users.destroy', $user) }}" method="DELETE" confirm="Delete the user" confirm-text="Are you sure?" confirm-button="Yes" cancel-button="No" class="text-red-400 hover:text-red-700 font-semibold">Delete</Link>
             </div>
         @endcell

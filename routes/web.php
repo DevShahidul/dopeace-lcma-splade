@@ -11,6 +11,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StateController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -64,6 +65,7 @@ Route::middleware('splade')->group(function () {
         Route::resource('/permissions', PermissionController::class);
         Route::resource('/ngos', NgoController::class);
         Route::resource('/learning-centers', LearningCenterController::class);
+        Route::resource('/students', StudentController::class);
     });
 
     require __DIR__ . '/auth.php';

@@ -2,13 +2,13 @@
     <div class="flex justify-between">
         <h1 class="text-2xl font-semibold pl-0 p-4">Employees List</h1>
         <div class="p-4 pr-0">
-            <Link href="{{ route('admin.employees.create') }}" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded text-white">New Employee</Link>
+            <Link slideover href="{{ route('admin.employees.create') }}" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded text-white">New Employee</Link>
         </div>
     </div>
     <x-splade-table :for="$employees">
         @cell('action', $employee)
             <div class="space-x-2">
-                <Link href="{{ route('admin.employees.edit', $employee) }}"
+                <Link slideover href="{{ route('admin.employees.edit', $employee) }}"
                     class="text-green-400 hover:text-green-700 font-semibold">
                 Edit
                 </Link>

@@ -1,6 +1,6 @@
-<x-admin-layout>
+<x-splade-modal>
     <div class="flex justify-between">
         <h1 class="text-2xl font-semibold p-4">Edit Employee</h1>
     </div>
     <x-splade-form :for="$form" />
-</x-admin-layout>
+</x-splade-modal>
