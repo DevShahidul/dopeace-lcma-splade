@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Class;
-use App\Models\Ngo;
+use App\Http\Requests\StudentStoreRequest;
 use App\Models\City;
-use App\Models\State;
+use App\Models\Classes;
 use App\Models\Country;
+use App\Models\LearningCenter;
 use App\Models\Section;
+use App\Models\State;
 use App\Models\Student;
 use App\Tables\Students;
+use Carbon\Carbon;
 use Illuminate\View\View;
-use Illuminate\Http\Request;
-use App\Models\LearningCenter;
 use ProtoneMedia\Splade\Facades\Splade;
-use App\Http\Requests\StudentStoreRequest;
 
 class StudentController extends Controller
 {
@@ -36,10 +35,10 @@ class StudentController extends Controller
         $countries = Country::all();
         $states = State::all();
         $cities = City::all();
-        $classes = Class::all();
+        $classes = Classes::all();
         $sections = Section::all();
-        $learningCenter = LearningCenter::all();
-        return view('admin.students.create', compact(['countries', 'states', 'cities', 'classes', 'sections', 'learningCenter']));
+        $learningCenters = LearningCenter::all();
+        return view('admin.students.create', compact(['countries', 'states', 'cities', 'classes', 'sections', 'learningCenters']));
     }
 
     /**
@@ -47,7 +46,12 @@ class StudentController extends Controller
      */
     public function store(StudentStoreRequest $request)
     {
-        Student::create($request->validated());
+
+        $age = Carbon::parse($request->birth_date)->diff(Carbon::now())->y;
+        dd($age);
+        Student::create(
+            $request->validated() + ['age' => $age]
+        );
         Splade::toast('Students Created successfully!')->autoDismiss(3);
         return to_route('admin.students.index');
     }
@@ -68,16 +72,20 @@ class StudentController extends Controller
         $countries = Country::all();
         $states = State::all();
         $cities = City::all();
-        $ngos = Ngo::all();
-        return view('admin.learning-centers.edit', compact('learningCenter', 'ngos', 'countries', 'states', 'cities'));
+        $classes = Classes::all();
+        $sections = Section::all();
+        $learningCenters = LearningCenter::all();
+        return view('admin.learning-centers.edit', compact('countries', 'states', 'cities', 'classes', 'sections', 'learningCenters'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StudentStoreRequest $request, Student $student)
     {
-        //
+        $student->update($request->validated());
+        Splade::toast('Student updated successfully!')->autoDismiss(3);
+        return to_route('admin.student.index');
     }
 
     /**
@@ -85,6 +93,8 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        $student->delete();
+        Splade::toast('Student deleted successfully!')->autoDismiss(3);
+        return to_route('admin.student.index');
     }
 }

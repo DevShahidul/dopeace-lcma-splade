@@ -10,6 +10,7 @@ use App\Models\State;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use ProtoneMedia\Splade\AbstractTable;
+use ProtoneMedia\Splade\Facades\Toast;
 use ProtoneMedia\Splade\SpladeTable;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -73,7 +74,7 @@ class Employees extends AbstractTable
             ->column('last_name', sortable: true)
             ->column(key: 'city.name', label: 'City')
             ->column(key: 'designation.name', label: 'Departrment')
-            ->column('action')
+            ->column('action', exportAs: false)
             ->selectFilter(
                 key: 'country_id',
                 options: Country::pluck('name', 'id')->toArray(),
@@ -94,6 +95,15 @@ class Employees extends AbstractTable
                 options: Designation::pluck('name', 'id')->toArray(),
                 label: 'designation'
             )
+            ->bulkAction(
+                label: 'Delete Selected Learning Centers',
+                each: fn (Employee $item) => $item->delete(),
+                confirm: 'Are you sure you want to delete the selected Learning Centers?',
+                confirmButton: 'Delete',
+                cancelButton: 'Cancel',
+                after: fn () => Toast::info('Learning Centers deleted successfully!'),
+            )
+            ->export()
             ->paginate(15);
     }
 }

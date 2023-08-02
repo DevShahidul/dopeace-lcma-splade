@@ -6,6 +6,7 @@ use App\Models\Designation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use ProtoneMedia\Splade\AbstractTable;
+use ProtoneMedia\Splade\Facades\Toast;
 use ProtoneMedia\Splade\SpladeTable;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -65,7 +66,16 @@ class Designations extends AbstractTable
             ->withGlobalSearch(columns: ['name'])
             ->column('id', sortable: true)
             ->column('name', sortable: true)
-            ->column('action')
+            ->column('action', exportAs: false)
+            ->bulkAction(
+                label: 'Delete Selected Learning Centers',
+                each: fn (Designation $item) => $item->delete(),
+                confirm: 'Are you sure you want to delete the selected Learning Centers?',
+                confirmButton: 'Delete',
+                cancelButton: 'Cancel',
+                after: fn () => Toast::info('Learning Centers deleted successfully!'),
+            )
+            ->export()
             ->paginate(15);
     }
 }

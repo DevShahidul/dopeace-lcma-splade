@@ -16,9 +16,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        $this->call(
-            CountrySeeder::class
-        );
+        $this->call([
+            CountrySeeder::class,
+            ClassesSeeder::class
+        ]);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         
         User::factory(100)->create();
@@ -26,7 +27,7 @@ class DatabaseSeeder extends Seeder
 
         $user = User::factory()->create([
             'first_name' => 'Admin',
-            'email' => 'admin@example.com',
+            'email' => 'admin@admin.com',
         ]);
         $user->assignRole($role);
     }

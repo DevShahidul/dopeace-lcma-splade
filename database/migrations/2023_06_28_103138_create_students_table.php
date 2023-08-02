@@ -36,11 +36,11 @@ return new class extends Migration
             $table->string('whatsapp_number')->nullable();
             $table->foreignId('learning_center_id')->constrained();
             $table->enum('learning_center_type', ['coaching', 'pre_school'])->default('pre_school');
-            $table->date('enroll_date');
+            $table->date('enrollment_date');
             $table->boolean('is_still_in_learning_center')->default(1);
             $table->date('graduated_date')->nullable();
             $table->string('institute_name')->nullable();
-            $table->string('institute_type')->nullable();
+            $table->string('institute_class_roll')->nullable();
             $table->string('address_of_institute')->nullable();
             $table->string('grade_of_students')->nullable();
             $table->string('department')->nullable();

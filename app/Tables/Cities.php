@@ -7,6 +7,7 @@ use App\Models\State;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use ProtoneMedia\Splade\AbstractTable;
+use ProtoneMedia\Splade\Facades\Toast;
 use ProtoneMedia\Splade\SpladeTable;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -67,12 +68,21 @@ class Cities extends AbstractTable
             ->column('id', sortable: true)
             ->column('name', sortable: true)
             ->column(key: 'state.name', label: 'State')
-            ->column('action')
+            ->column('action', exportAs: false)
             ->selectFilter(
                 key: 'state_id',
                 options: State::pluck('name', 'id')->toArray(),
                 label: 'State'
             )
+            ->bulkAction(
+                label: 'Delete Selected Learning Centers',
+                each: fn (City $city) => $city->delete(),
+                confirm: 'Are you sure you want to delete the selected Learning Centers?',
+                confirmButton: 'Delete',
+                cancelButton: 'Cancel',
+                after: fn () => Toast::info('Learning Centers deleted successfully!'),
+            )
+            ->export()
             ->paginate(15);
     }
 }

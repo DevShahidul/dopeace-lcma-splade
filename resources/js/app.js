@@ -1,10 +1,11 @@
-import "./bootstrap";
-import "../css/app.css";
 import "@protonemedia/laravel-splade/dist/style.css";
+import "../css/app.css";
+import "./bootstrap";
 
-import { createApp } from "vue/dist/vue.esm-bundler.js";
 import { renderSpladeApp, SpladePlugin } from "@protonemedia/laravel-splade";
+import { createApp } from "vue/dist/vue.esm-bundler.js";
 import Sidebar from "./components/Sidebar.vue";
+import CreateStudent from "./components/students/CreateStudent.vue";
 
 const el = document.getElementById("app");
 
@@ -17,4 +18,5 @@ createApp({
         progress_bar: true,
     })
     .component("sidebar", Sidebar)
+    .component("create-student", CreateStudent)
     .mount(el);

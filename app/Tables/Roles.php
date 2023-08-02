@@ -2,7 +2,6 @@
 
 namespace App\Tables;
 
-use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use ProtoneMedia\Splade\AbstractTable;
@@ -66,7 +65,8 @@ class Roles extends AbstractTable
             ->withGlobalSearch(columns: ['name'])
             ->column('id', sortable: true)
             ->column('name', sortable: true)
-            ->column('action')
+            ->column('action', exportAs: false)
+            ->export()
             ->paginate(15);
     }
 }

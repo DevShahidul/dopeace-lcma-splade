@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use ProtoneMedia\Splade\AbstractTable;
+use ProtoneMedia\Splade\Facades\Toast;
 use ProtoneMedia\Splade\SpladeTable;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -77,7 +78,16 @@ class Users extends AbstractTable
             // ->rowLink(function (User $user) {
             //     return route('admin.users.edit', $user);
             // })
-            ->column('action')
+            ->column('action', exportAs: false)
+            ->bulkAction(
+                label: 'Delete Selected Learning Centers',
+                each: fn (User $item) => $item->delete(),
+                confirm: 'Are you sure you want to delete the selected Learning Centers?',
+                confirmButton: 'Delete',
+                cancelButton: 'Cancel',
+                after: fn () => Toast::info('Learning Centers deleted successfully!'),
+            )
+            ->export()
             ->paginate(15);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Tables;
 
-use App\Models\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use ProtoneMedia\Splade\AbstractTable;
@@ -67,7 +66,8 @@ class Permissions extends AbstractTable
             ->column('id', sortable: true)
             ->column('name', sortable: true)
             ->column('group_name', sortable: false)
-            ->column('action')
+            ->column('action', exportAs: false)
+            ->export()
             ->paginate(15);
     }
 }
