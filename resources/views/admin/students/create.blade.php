@@ -1,6 +1,6 @@
 <x-splade-modal>
     <h1 class="text-2xl font-semibold p-4">New Students</h1>
-    <x-splade-form  default="{ is_in_learning_center: true }" :action="route('admin.students.store')" class="p-4 bg-white rounded-md space-y-2">
+    <x-splade-form default="{ is_still_in_learning_center: true }" :action="route('admin.students.store')" class="p-4 bg-white rounded-md space-y-2">
         <x-splade-input name="first_name" label="First Name" />
         <x-splade-input name="last_name" label="Last Name" />
         <x-splade-input name="fathers_name" label="Fathers Name" />
@@ -46,6 +46,7 @@
                 <option value="{{$class->id}}">{{$class->name}}</option>
             @endforeach
         </x-splade-select>
+        <x-splade-input name="class_roll" label="{{__('Class Roll')}}" />
         <x-splade-select name="section_id" label="{{__('Section')}}">
             @foreach($sections as $section)
                 <option value="{{$section->id}}">{{$section->name}}</option>
@@ -54,10 +55,10 @@
         <x-splade-input name="enrollment_date" label="Date of Enrollment" date />
         
         <label class="flex items-center">
-            <input class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 disabled:opacity-50" v-model="form.is_in_learning_center" type="checkbox" name="is_still_in_learning_center" />
+            <input class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 disabled:opacity-50" v-model="form.is_still_in_learning_center" type="checkbox" name="is_still_in_learning_center" />
             <span class="ml-2">Is still in learning center</span>
         </label>
-        <div class="space-y-2" v-show="!form.is_in_learning_center">
+        <div class="space-y-2" v-show="!form.is_still_in_learning_center">
             <x-splade-input name="institute_name" label="Institute name" />
             <x-splade-select name="grade_of_students" label="{{__('Grade of Students')}}">
                 <option value="coaching">Coaching</option>
@@ -67,6 +68,6 @@
             <x-splade-input name="department" label="Department" />
             <x-splade-input name="graduated_date" label="Graduated date" date />
         </div>
-    <x-splade-submit />
+        <x-splade-submit />
     </x-splade-form>
 </x-splade-modal>

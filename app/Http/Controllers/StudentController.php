@@ -48,9 +48,11 @@ class StudentController extends Controller
     {
 
         $age = Carbon::parse($request->birth_date)->diff(Carbon::now())->y;
-        dd($age);
         Student::create(
-            $request->validated() + ['age' => $age]
+            $request->validated() + 
+            [
+                'age' => "{$age} years old",
+            ]
         );
         Splade::toast('Students Created successfully!')->autoDismiss(3);
         return to_route('admin.students.index');
@@ -75,7 +77,7 @@ class StudentController extends Controller
         $classes = Classes::all();
         $sections = Section::all();
         $learningCenters = LearningCenter::all();
-        return view('admin.learning-centers.edit', compact('countries', 'states', 'cities', 'classes', 'sections', 'learningCenters'));
+        return view('admin.students.edit', compact('student', 'countries', 'states', 'cities', 'classes', 'sections', 'learningCenters'));
     }
 
     /**
@@ -83,7 +85,11 @@ class StudentController extends Controller
      */
     public function update(StudentStoreRequest $request, Student $student)
     {
-        $student->update($request->validated());
+        $age = Carbon::parse($request->birth_date)->diff(Carbon::now())->y;
+        $student->update($request->validated()+ 
+        [
+            'age' => "{$age} years old",
+        ]);
         Splade::toast('Student updated successfully!')->autoDismiss(3);
         return to_route('admin.student.index');
     }

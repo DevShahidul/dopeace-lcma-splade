@@ -35,8 +35,8 @@ return new class extends Migration
             $table->string('facebook_url')->nullable();
             $table->string('whatsapp_number')->nullable();
             $table->foreignId('learning_center_id')->constrained();
-            $table->enum('learning_center_type', ['coaching', 'pre_school'])->default('pre_school');
             $table->date('enrollment_date');
+            $table->enum('learning_center_type', ['coaching', 'pre_school'])->default('pre_school');
             $table->boolean('is_still_in_learning_center')->default(1);
             $table->date('graduated_date')->nullable();
             $table->string('institute_name')->nullable();

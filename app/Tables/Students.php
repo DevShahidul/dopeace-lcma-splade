@@ -4,7 +4,7 @@ namespace App\Tables;
 
 use App\Models\City;
 use App\Models\Country;
-use App\Models\Ngo;
+use App\Models\LearningCenter;
 use App\Models\State;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -64,32 +64,34 @@ class Students extends AbstractTable
     public function configure(SpladeTable $table)
     {
         $table
-            ->withGlobalSearch(columns: ['id', 'first_name', 'last_name'])
+            ->withGlobalSearch(columns: ['id', 'first_name', 'last_name', 'country_id', 'state_id', 'city_id', 'learning_center_id'])
             ->column('id', sortable: true)
             ->column('first_name', sortable: true)
             ->column('last_name', sortable: true)
+            ->column(key: 'country.name', label: 'Country', sortable: true)
+            ->column(key: 'state.name', label: 'State', sortable: true)
             ->column(key: 'city.name', label: 'City')
 
             ->column('action', exportAs: false)
             ->selectFilter(
                 key: 'country_id',
-                options: Country::pluck('name', 'id')->toArray(),
+                options: Country::all()->pluck('name', 'id')->toArray(),
                 label: 'Country'
             )
             ->selectFilter(
                 key: 'state_id',
-                options: State::pluck('name', 'id')->toArray(),
+                options: State::all()->pluck('name', 'id')->toArray(),
                 label: 'State'
             )
             ->selectFilter(
                 key: 'city_id',
-                options: City::pluck('name', 'id')->toArray(),
+                options: City::all()->pluck('name', 'id')->toArray(),
                 label: 'City'
             )
             ->selectFilter(
-                key: 'ngo_id',
-                options: Ngo::pluck('name', 'id')->toArray(),
-                label: 'NGO'
+                key: 'learning_center_id',
+                options: LearningCenter::all()->pluck('name', 'id')->toArray(),
+                label: 'Learning center'
             )
             ->bulkAction(
                 label: 'Delete Selected Students',
@@ -103,10 +105,5 @@ class Students extends AbstractTable
             ->paginate(15);
 
             // ->searchInput()
-            // ->selectFilter()
-            // ->withGlobalSearch()
-
-            // ->bulkAction()
-            // ->export()
     }
 }
