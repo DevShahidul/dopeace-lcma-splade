@@ -5,8 +5,8 @@
         <sidebar />
 
         <!-- Page Content -->
-        <main class="flex-1">
-            <div class="max-w-6xl mx-auto">
+        <main class="flex-1 pr-4">
+            <div class="content-wrap">
                 {{ $slot }}
             </div>
         </main>

@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     use HasFactory;
+     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
 
     protected $fillable = [
         'class_id',
@@ -49,5 +54,20 @@ class Student extends Model
     public function section()
     {
         return $this->belongsTo(Section::class);
+    }
+    public function country(){
+        return $this->belongsTo(Country::class);
+    }
+
+    public function ngo(){
+        return $this->belongsTo(Ngo::class);
+    }
+
+    public function city(){
+        return $this->belongsTo(City::class);
+    }
+
+    public function state(){
+        return $this->belongsTo(State::class);
     }
 }

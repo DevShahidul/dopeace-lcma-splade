@@ -10,7 +10,7 @@
         @cell('action', $student)
             <div class="space-x-2">
                 <Link slideover href="{{ route('admin.students.edit', $student) }}" class="text-green-400 hover:text-green-700 font-semibold">Edit</Link>
-                <Link href="{{ route('admin.students.destroy', $student) }}" method="DELETE" confirm="Delete the learning-center" confirm-text="Are you sure?" confirm-button="Yes" cancel-button="No" class="text-red-400 hover:text-red-700 font-semibold">Delete</Link>
+                <Link href="{{ route('admin.students.destroy', $student) }}" method="DELETE" confirm="Delete the student" confirm-text="Are you sure?" confirm-button="Yes" cancel-button="No" class="text-red-400 hover:text-red-700 font-semibold">Delete</Link>
             </div>
         @endcell
     </x-splade-table>

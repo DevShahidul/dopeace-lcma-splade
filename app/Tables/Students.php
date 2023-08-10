@@ -44,6 +44,9 @@ class Students extends AbstractTable
      */
     public function for()
     {
+
+        // return Student::query();
+
         $globalSearch = AllowedFilter::callback('global', function ($query, $value){
             $query->where(function ($query) use ($value) {
                 Collection::wrap($value)->each(function ($value) use ($query) {
@@ -52,7 +55,7 @@ class Students extends AbstractTable
             });
         });
 
-        return QueryBuilder::for(Student::class)->defaultSort('id')->allowedSorts(['id', 'first_name', 'last_name'])->allowedFilters(['id', 'first_name', 'last_name', 'country_id', 'state_id', 'city_id', 'ngo_id', $globalSearch]);
+        return QueryBuilder::for(Student::class)->defaultSort('id')->allowedSorts(['id', 'first_name', 'last_name'])->allowedFilters(['id', 'first_name', 'last_name', 'country_id', 'state_id', 'city_id', 'learning_center_id', $globalSearch]);
     }
 
     /**
@@ -66,13 +69,23 @@ class Students extends AbstractTable
         $table
             ->withGlobalSearch(columns: ['id', 'first_name', 'last_name', 'country_id', 'state_id', 'city_id', 'learning_center_id'])
             ->column('id', sortable: true)
+            ->column('action', exportAs: false)
             ->column('first_name', sortable: true)
             ->column('last_name', sortable: true)
+            ->column('fathers_name', sortable: true)
+            ->column('mothers_name', sortable: true)
+            ->column('gender')
+            ->column('birth_date')
+            ->column('age')
             ->column(key: 'country.name', label: 'Country', sortable: true)
             ->column(key: 'state.name', label: 'State', sortable: true)
             ->column(key: 'city.name', label: 'City')
-
-            ->column('action', exportAs: false)
+            ->column('zip_code')
+            ->column('address')
+            ->column('phone')
+            ->column('email')
+            ->column('facebook_url')
+            ->column('whatsapp_number')
             ->selectFilter(
                 key: 'country_id',
                 options: Country::all()->pluck('name', 'id')->toArray(),

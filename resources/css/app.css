@@ -5,5 +5,10 @@
 @layer components {
     .main-sidebar{
         height: calc(100vh - 65px);
+        min-width: 280px;
+    }
+
+    .content-wrap{
+        max-width: calc(100vw - (280px + 2rem));
     }
 }

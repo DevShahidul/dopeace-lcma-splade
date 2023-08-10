@@ -23,7 +23,7 @@ class StudentController extends Controller
     public function index(): View
     {
         return view('admin.students.index', [
-            'students' => Students::class 
+            'students' => Students::class,
         ]);
     }
 
