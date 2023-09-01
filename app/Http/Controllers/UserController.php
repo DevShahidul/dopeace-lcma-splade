@@ -18,6 +18,11 @@ class UserController extends Controller
      */
     public function index()
     {
+        // $users = QueryBuilder::for(User::class)
+        // ->defaultSort('name')
+        // ->allowedSorts(['name', 'email'])
+        // ->paginate()
+        // ->withQueryString();
         return view('admin.users.index', [
             'users' => Users::class
         ]);

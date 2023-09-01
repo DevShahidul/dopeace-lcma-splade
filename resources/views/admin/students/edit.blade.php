@@ -1,6 +1,6 @@
-<x-splade-modal>
+<x-splade-modal default="{ is_still_in_learning_center: true }">
     <h1 class="text-2xl font-semibold p-4">Edit Student</h1>
-    <x-splade-form default="{ is_still_in_learning_center: true }" :action="route('admin.students.update', $student)" method="PUT" class="p-4 bg-white rounded-md space-y-2">
+    <x-splade-form confirm="Are you sure you want to update this student?" :default="$student" :action="route('admin.students.update', $student)" method="PUT" class="p-4 bg-white rounded-md space-y-2">
         <x-splade-input name="first_name" label="First Name" />
         <x-splade-input name="last_name" label="Last Name" />
         <x-splade-input name="fathers_name" label="Fathers Name" />

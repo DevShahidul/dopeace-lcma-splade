@@ -86,6 +86,8 @@ class Students extends AbstractTable
             ->column('email')
             ->column('facebook_url')
             ->column('whatsapp_number')
+            ->column(key: 'learning_center.name', label: 'Learning Center Name')
+            ->column(key: 'is_still_in_learning_center', label: 'Is still in learning center')
             ->selectFilter(
                 key: 'country_id',
                 options: Country::all()->pluck('name', 'id')->toArray(),

@@ -91,7 +91,7 @@ class StudentController extends Controller
             'age' => "{$age} years old",
         ]);
         Splade::toast('Student updated successfully!')->autoDismiss(3);
-        return to_route('admin.student.index');
+        return to_route('admin.students.index');
     }
 
     /**
