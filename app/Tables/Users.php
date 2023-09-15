@@ -87,7 +87,7 @@ class Users extends AbstractTable
                 cancelButton: 'Cancel',
                 after: fn () => Toast::info('Learning Centers deleted successfully!'),
             )
-            ->allowedSorts(['username', ])
+            ->defaultSort('username')
             ->export()
             ->paginate(15);
     }
